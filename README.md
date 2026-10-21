@@ -66,7 +66,7 @@ Jako opcja awaryjna pozostaje nam SQLite API i metody zwykłego odczytywania pli
 
 Stosunkowy brak alternatyw bo w przeciwieństwie do regularnej deweloperki, tutaj
 
-![./dwasposoby.png]
+!(są dwa sposoby, mój albo)[https://raw.githubusercontent.com/soupcan12/PIM-sem7_2026-27/refs/heads/main/dwasposoby.png]
 
 ### Networking:
 
