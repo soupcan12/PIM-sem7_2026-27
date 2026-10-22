@@ -2,8 +2,6 @@
 
 # Etap 1: Przygotowania i wybory
 
-Ścieżka: Kotlin & Jetpack Compose
-
 ### Status (21/10/26):
 #### Co zrobione od ostatniego razu?
 
@@ -25,17 +23,28 @@
 
 # Etap 2: Plan na wykonanie
 
-## Szczegółowy opis:
+## Dokładniejszy opis:
 
-Gra mobilna, tzw. „clicker”, „idler”.
+Gra mobilna, tzw. „clicker”, „idler”. Gracz zbiera punkty naciskając na główny element interfejsu, wydając je później na różnej maści ulepszenia pozwalające zbierać punkty w tempie szybszym niż uprzednio. W planach uwzględnione jest wzbogacenie projektu w miarę możliwości o zróżnicowane minigry, rozbudowujące pętle gry i przynoszące dodatkowe bonusy graczowi.
 
-Wzbogacona w miarę możliwości o różnego rodzaju minigry, rozbudowujące pętle gry.
+Poglądowy opis pętli grywalności:
+- poklikać parę razy w „główny element”,
+- zakupić wybrane ulepszenia,
+- *powtarzać do znudzenia*,
+- opcj. wziąć udział w nagradzanej/-ych minigrze/-ach,
+- opcj. skorzystać z systemu prestiżu, (system [metapostępu](https://en.wiktionary.org/wiki/meta-progression) resetujący dotychczasowe osiągnięcia w zamian za długoterminowe nagrody)
+- opcj. dążyć do odkrycia [osiągnięć (def. 4.)](https://en.wiktionary.org/wiki/achievement#Noun) przynoszących odpowiednie bonusy,
+- *powtarzać do znudzenia*
 
-Artstyle TBD
+Istotną mechaniką tego rodzaju gier jest także otrzymywanie pewnej części punktów, o wartości obliczanej na podstawie ulepszeń oraz czasu od opuszczenia gry.
+
+Wartości artystyczne bliżej nieokreślone na tym etapie projektu, pozostałe szczegóły także niewymienione z racji otwartości twórczej projektu.
 
 ## Technologie:
 ### Frontend:
 
+> Do wyboru:
+> 
 > Kotlin & JetpackCompose vs Flutter
 >
 > Lepsza Java, z interfejsem natywnym, wykorzystujący dostęp do API `androidx`
@@ -49,6 +58,8 @@ Wszelkie opcje bardziej przeznaczone dla gier odpadają, bo to PIM a nie gierki
 Frameworki webowe byłyby lepszym wyborem jeżeli chcielibyśmy przenosić się z tą grą dalej, ale chyba nie ma sensu
 
 - Material Design?
+
+Jeżeli zdecydujemy się na Kotlina to może się przydać
 
 Może dla paru elementów, to bardziej kwestia art designu niż wyboru technologii
 
@@ -84,7 +95,7 @@ Nie powinno być blokady na konta akademickie jak z Firebase
 
 bardziej wyjście awaryjne niż cokolwiek innego
 
-powinienem mieć jeszcze abonament na mongodb na ten semestr
+i tak powinienem mieć jeszcze abonament na mongodb na ten semestr
 
 ---
 
