@@ -43,59 +43,47 @@ Wartości artystyczne bliżej nieokreślone na tym etapie projektu, pozostałe s
 ## Technologie:
 ### Frontend:
 
-> Do wyboru:
-> 
-> Kotlin & JetpackCompose vs Flutter
->
-> Lepsza Java, z interfejsem natywnym, wykorzystujący dostęp do API `androidx`
-> 
-> albo
-> 
-> Nowy język do nauki, ale wygląda na badziej uniwersalny, do tego w większości crossplatformowy
+~~Do wyboru~~
 
-Wszelkie opcje bardziej przeznaczone dla gier odpadają, bo to PIM a nie gierki
+- Kotlin & JetpackCompose
 
-Frameworki webowe byłyby lepszym wyborem jeżeli chcielibyśmy przenosić się z tą grą dalej, ale chyba nie ma sensu
+Frameworki webowe były by lepszym wyborem dla dostępności i prostoty, aczkolwiek idea ta krzyżuje się z zamysłem przedmiotu. Podobna kwestia dotyczy jakiegokolwiek silnika przeznaczonego dla gier.
 
-- Material Design?
+- Material Design
 
-Jeżeli zdecydujemy się na Kotlina to może się przydać
-
-Może dla paru elementów, to bardziej kwestia art designu niż wyboru technologii
+Dla wybranych elementów, bądź jako ogólne zasady dla spójności interfejsu.
 
 ### Backend:
 
 - SQLite z abstrakcją `Room`
 
-Hardcodowanie kwerend do SQL nie jest najlepszym pomysłem, żeby nie wkopać sie potem w dołek
+Hardcodowanie kwerend do SQL nie jest najlepszym pomysłem, delikatnie mówiąc. O ile ułatwia początkową pracę, tym bardziej wprowadza tzw. „Tech debt” od samego początku projektu.
 
-[Room](https://developer.android.com/training/data-storage/room) podobno bardzo z tym pomaga
+Abstrakcja [Room](https://developer.android.com/training/data-storage/room) powinna bardzo pomóc z tym problemem.
 
-Nawet jeżeli zdecydujemy na coś bardziej multiplayerowego, możemy odciążyć serwer przetrzymując dane, które nie będą tam potrzebne
+Nawet jeżeli zdecydujemy się w projekcie na aspekty bardziej wieloosobowe, możemy odciążyć serwer globalny, przetrzymując dane, które nie będą tam potrzebne na urządzeniu końcowym.
 
-Jako opcja awaryjna pozostaje nam SQLite API i metody zwykłego odczytywania plików https://developer.android.com/training/data-storage
+Jako opcja awaryjna pozostaje nam SQLite API i metody zwykłego odczytywania plików: [https://developer.android.com/training/data-storage](https://developer.android.com/training/data-storage)
 
-Stosunkowy brak alternatyw bo w przeciwieństwie do regularnej deweloperki, tutaj
+Stosunkowy brak alternatyw bo w przeciwieństwie do regularnej deweloperki, tutaj jest „jedyna błogosławiona droga”.
 
 ![są dwa sposoby, mój albo](https://raw.githubusercontent.com/soupcan12/PIM-sem7_2026-27/refs/heads/main/dwasposoby.png)
 
 ### Networking:
 
-Leaderboard i wymuszona weryfikacja danych o backend,
+Leaderboard i wymuszona weryfikacja danych o backend, czy podejście Offline First?
 
-czy podejście Offline First?
+Zależnie od rozwinięcia planu i ambicji:
 
 - Supabase
 
-Dobry darmowy tier, akurat na projekt studencki
+Dobry darmowy tier, idealny na projekt studencki.
 
-Nie powinno być blokady na konta akademickie jak z Firebase
+Dodatkowo, nie powinno być blokady na konta akademickie jak w przypadku Firebase.
 
-- mikrus i mongo/postgres
+- tani VPS i `mongodb`/`postgressql`
 
-bardziej wyjście awaryjne niż cokolwiek innego
-
-i tak powinienem mieć jeszcze abonament na mongodb na ten semestr
+Wyjście bardziej awaryjne, choć nadal funkcjonalne, ograniczone przez wykupione zasoby, aniżeli warunki serwisu.
 
 ---
 
