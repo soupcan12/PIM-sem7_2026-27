@@ -23,6 +23,23 @@
 
 # Etap 2: Plan na wykonanie
 
+### Status (28/10/26):
+#### Co zrobiono od ostatniego razu?
+
+- Rozpatrzono wybory i kierunek projektu
+- Rozpatrzenie możliwości oprawy graficznej i motywu artystycznego gry
+
+#### Co pozostało do zrobienia?
+
+- (ostateczny) Wybór kierunku artystycznego
+- Fundamenty aplikacji projektowej
+- Całość projektu
+
+#### Blokady
+
+- Praca inżynierska
+- Nierówność w zdolnościach artystycznych względem autorów projektu
+
 ## Dokładniejszy opis:
 
 Gra mobilna, tzw. „clicker”, „idler”. Gracz zbiera punkty naciskając na główny element interfejsu, wydając je później na różnej maści ulepszenia pozwalające zbierać punkty w tempie szybszym niż uprzednio. W planach uwzględnione jest wzbogacenie projektu w miarę możliwości o zróżnicowane minigry, rozbudowujące pętle gry i przynoszące dodatkowe bonusy graczowi.
@@ -66,8 +83,6 @@ Nawet jeżeli zdecydujemy się w projekcie na aspekty bardziej wieloosobowe, mo
 Jako opcja awaryjna pozostaje nam SQLite API i metody zwykłego odczytywania plików: [https://developer.android.com/training/data-storage](https://developer.android.com/training/data-storage)
 
 Stosunkowy brak alternatyw bo w przeciwieństwie do regularnej deweloperki, tutaj jest „jedyna błogosławiona droga”.
-
-![są dwa sposoby, mój albo](https://raw.githubusercontent.com/soupcan12/PIM-sem7_2026-27/refs/heads/main/dwasposoby.png)
 
 ### Networking:
 
