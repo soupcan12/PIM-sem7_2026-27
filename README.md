@@ -104,7 +104,29 @@ Wyjście bardziej awaryjne, choć nadal funkcjonalne, ograniczone przez wykupion
 
 # Etap 3: Budowanie projektu
 
-TBD
+### Status (11/11/26):
+#### Co zrobiono od ostatniego razu?
+
+- Kierunek artystyczny gry
+- Fundamenty działającej gry
+ - Importowanie grafiki
+ - Poruszające się postacie (logika placeholder)
+ - Elementy interfejsu (placeholder)
+ - Dynamiczne rozmieszczenie elementów w tle
+  - Z uwagą na różne rozdzielczości urządzeń
+
+#### Co pozostało do zrobienia?
+
+- Logika gry
+ - Minigry
+ - Ulepszenia
+ - Progresja
+- Całość projektu
+
+#### Blokady
+
+- Android Studio
+- Praca inżynierska
 
 # Etap 4: Wykończenia
 
