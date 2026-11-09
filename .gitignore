@@ -1,35 +1,49 @@
 # Gradle files
-.gradle/
-build/
-.kotlin/
+clickergame/.gradle
+clickergame/build
+clickergame/.kotlin
+clickergame/gradlew.bat
+clickergame/gradlew
 
 # Local configuration file (sdk path, etc)
-local.properties
+clickergame/local.properties
 
 # Log/OS Files
 *.log
 
 # Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
+clickergame/captures
+clickergame/.externalNativeBuild
+clickergame/.cxx
+clickergame/*.aab
+clickergame/*.apk
+clickergame/output-metadata.json
 
 # IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+clickergame/*.iml
+clickergame/.idea
+clickergame/misc.xml
+clickergame/deploymentTargetDropDown.xml
+clickergame/render.experimental.xml
 
 # Keystore files
-*.jks
-*.keystore
+clickergame/*.jks
+clickergame/*.keystore
 
 # Google Services (e.g. APIs or Firebase)
-google-services.json
+clickergame/google-services.json
 
 # Android Profiling
-*.hprof
+clickergame/*.hprof
+
+# android tools dont work
+android_sdk/
+
+# clickergame/.gitignore
+clickergame/*.iml
+
+# macos???
+clickergame/.DS_Store
+
+# build dir
+clickergame/app/build
