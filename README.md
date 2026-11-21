@@ -112,4 +112,30 @@ Wartości artystyczne bliżej nieokreślone na tym etapie projektu, pozostałe s
 
 # Etap 4: Wykończenia
 
-TBD
+### Status (??/11/26)
+#### Co zrobiono od ostatniego razu?
+
+- Rozbito sprite postaci na pojedyncze elementy
+    - Zmieniono galerię na sklep z ciuchami
+- Postać porusza się w bardziej dynamiczny sposób
+- Gra ma ikonkę [szybki placeholder]
+- Dopracowane menu nawigacji
+- Ekran minigier
+    - Placeholdery dla gier
+    - Podzespoły i przygotowanie
+- Ujednolicony interfejs zakładek
+
+#### Co zostało do zrobienia?
+
+- Spolszczenie
+- Faktyczna minigra
+- SPOILER ||sprite do korupcji postaci||
+    - SPOILER ||przerobienie systemu korupcji (rozbić na poszczególne elementy zamiast jednego sprite)||
+- wyrzucić tekst tytułowy bo jest brzydki tbh
+- Zbalansowanie ulepszeń
+
+#### Blokady:
+
+- Praca dyplomowa
+- Akceleracja Obliczeń w Przetwarzaniu Danych
+- Czekanie na nowe spritey (spoiler)

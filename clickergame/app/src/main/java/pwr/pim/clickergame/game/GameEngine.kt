@@ -4,12 +4,14 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.setValue
 import kotlin.random.Random
 import pwr.pim.clickergame.R
 
 enum class CharacterEvolutionStage(val drawableRes: Int) {
+    // deprecated: replaced whole sprite sheet with individual sprites
     NORMAL(R.drawable.charactermerged_normal),
     CORRUPT1(R.drawable.charactermerged_normal),
     CORRUPT2(R.drawable.charactermerged_normal),
@@ -17,6 +19,14 @@ enum class CharacterEvolutionStage(val drawableRes: Int) {
     CORRUPT4(R.drawable.charactermerged_normal),
     CORRUPT5(R.drawable.charactermerged_normal),
 }
+
+data class DressUp(
+    val id: String,
+    val name: String,
+    val slot: String, // "hairstyle", "outerwear", "pants", "shoes", "glasses", "eyes"
+    val drawableRes: Int,
+    val cost: Int
+)
 
 class GameEngine {
     var score by mutableDoubleStateOf(0.0)
@@ -31,6 +41,49 @@ class GameEngine {
     // Upgrade levels map: upgradeId -> level
     val upgradeLevels = mutableStateMapOf<String, Int>()
 
+    // Clothes and Clothing Store
+    val clothesItems = listOf(
+        DressUp("hair1", "Default Hair", "hairstyle", R.drawable.hair1, 0),
+        DressUp("hair2", "Default Hair", "hairstyle", R.drawable.hair2, 0),
+        DressUp("hoodie1", "Cozy Hoodie", "outerwear", R.drawable.hoodie1, 0),
+        DressUp("hoodie2", "Cozy Hoodie", "outerwear", R.drawable.hoodie2, 0),
+        DressUp("pants1", "Comfy Pants", "pants", R.drawable.pants1, 0),
+        DressUp("pants2", "Comfy Pants", "pants", R.drawable.pants2, 0),
+        DressUp("shoes1", "Sneakers", "shoes", R.drawable.shoes1, 0),
+        DressUp("shoes2", "Sneakers", "shoes", R.drawable.shoes2, 0),
+        DressUp("glasses0", "No glasses", "glasses", R.drawable.nothing, 0),
+        DressUp("glasses1", "Cool Glasses", "glasses", R.drawable.glasses1, 0),
+        DressUp("skirt1", "skirt", "pants", R.drawable.skirt1, 0),
+        DressUp("eyes1", "Brown Eyes", "eyes", R.drawable.eyes1, 0),
+    )
+    // dressup order
+    val unlockedClothesIds = mutableStateListOf("hair1", "hoodie1", "pants1", "shoes1", "glasses1", "eyes1")
+    val characterSprites = mutableStateMapOf<String, Int?>().apply {
+        put("hairstyle", R.drawable.hair1)
+        put("outerwear", R.drawable.hoodie1)
+        put("pants", R.drawable.pants1)
+        put("shoes", R.drawable.shoes1)
+        put("glasses", R.drawable.glasses1)
+        put("eyes", R.drawable.eyes1)
+    }
+    fun dressSprite(slot: String, drawableRes: Int?) {characterSprites[slot] = drawableRes}
+
+    fun buyAndEquipClothes(item: DressUp): Boolean {
+        if (unlockedClothesIds.contains(item.id)) {
+            // unlocked = equip
+            characterSprites[item.slot] = item.drawableRes
+            return true
+        }
+
+        // Buy with coins
+        if (coins >= item.cost) {
+            coins -= item.cost
+            unlockedClothesIds.add(item.id)
+            characterSprites[item.slot] = item.drawableRes
+            return true
+        }
+        return false
+    }
     val availableUpgrades = listOf(
         UpgradeDefinition(
             id = "flat_click",
@@ -79,7 +132,7 @@ class GameEngine {
         ),
         UpgradeDefinition(
             id = "corruption",
-            name = "Finals Week",
+            name = "Sesja",
             description = "ONE MORE GAME",
             type = UpgradeType.CHARACTER_EVOLUTION,
             baseCost = 2500.0,
@@ -161,7 +214,7 @@ class GameEngine {
         val definition = availableUpgrades.find { it.id == upgradeId } ?: return false
         val currentLevel = upgradeLevels[upgradeId] ?: 0
 
-        // If character evolution and reached max stage, lock it
+        // if character evolution and reached max stage: lock it
         if ((definition.type == UpgradeType.CHARACTER_EVOLUTION) && (currentLevel >= CharacterEvolutionStage.entries.size - 1)) {
             return false
         }

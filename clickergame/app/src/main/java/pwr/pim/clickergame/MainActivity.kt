@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.compose.ui.unit.dp
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.delay
 import pwr.pim.clickergame.game.GameEngine
@@ -86,19 +85,18 @@ fun ClickergameApp() {
                     AppDestinations.UPGRADE -> {
                         UpgradesScreen(
                             gameEngine = gameEngine,
-                            modifier = Modifier.padding(top = 130.dp),
                         )
                     }
                     AppDestinations.MINIGAMES -> {
-                        MinigamesScreen()
+                        MinigamesScreen(gameEngine = gameEngine)
                     }
                     AppDestinations.GALLERY -> {
-                        GalleryScreen()
+                        GalleryScreen(gameEngine = gameEngine)
                     }
                 }
 
-                // Floating Scoreboard Header (only on HOME and UPGRADE)
-                if (currentDestination == AppDestinations.HOME || currentDestination == AppDestinations.UPGRADE) {
+                // Floating Scoreboard Header (only on HOME)
+                if (currentDestination == AppDestinations.HOME) {
                     TopStatsHeader(
                         score = gameEngine.score.toInt(),
                         coins = gameEngine.coins,
@@ -115,9 +113,9 @@ enum class AppDestinations(
     val icon: Int,
 ) {
     HOME("Home", R.drawable.ic_home),
-    UPGRADE("Upgrades", R.drawable.ic_home),
-    MINIGAMES("Minigames", R.drawable.ic_home),
-    GALLERY(label = "Gallery", icon = R.drawable.ic_home),
+    UPGRADE("Upgrades", R.drawable.ic_shop),
+    MINIGAMES("Minigames", R.drawable.ic_game),
+    GALLERY(label = "Wardrobe", icon = R.drawable.ic_camera),
 }
 
 @Preview(showBackground = true)
