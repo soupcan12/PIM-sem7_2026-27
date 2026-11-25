@@ -9,9 +9,12 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -51,21 +54,27 @@ fun HomeScreen(
             Image(
                 painter = painterResource(R.drawable.wall1),
                 contentDescription = "Background Wall",
-                modifier = Modifier.size(width, height / 1.2f).offset(0.dp, 0.dp),
+                modifier = Modifier
+                    .size(width, height / 1.2f)
+                    .offset(0.dp, 0.dp),
                 contentScale = ContentScale.FillWidth
             )
             // BACKGROUND (floor)
             Image(
                 painter = painterResource(R.drawable.floor1),
                 contentDescription = "Background Floor",
-                modifier = Modifier.size(width, height).offset(0.dp, height / 7f),
+                modifier = Modifier
+                    .size(width, height)
+                    .offset(0.dp, height / 7f),
                 contentScale = ContentScale.FillWidth
             )
             // BACKGROUND (window)
             Image(
                 painter = painterResource(R.drawable.window1),
                 contentDescription = "Background Window",
-                modifier = Modifier.size(width / 2f, height / 2f).offset(x=width/4f, y=0.dp),
+                modifier = Modifier
+                    .size(width / 2f, height / 2f)
+                    .offset(x = width / 4f, y = 0.dp),
                 contentScale = ContentScale.FillWidth
             )
             // Static background sprite entities
@@ -111,14 +120,14 @@ fun HomeScreen(
                         entity.x += entity.vx
                         entity.y += entity.vy
 
-                        // Horizontal bounds
+                        // horizontal bounds
                         val maxX = containerWidth - entity.width
                         if ((entity.x < 0.dp) || (entity.x > maxX)) {
                             changeMovementDirection(entity)
                             entity.x = entity.x.coerceIn(0.dp, maxX)
                         }
 
-                        // Vertical bounds
+                        // vertical bounds
                         val maxY = containerHeight - entity.height
                         // TOP MOVEMENT BOUNDARY CHECKED AGAINST BOTTOM EDGE OF SPRITE (entity.y + entity.height)
                         if ((entity.y + entity.height) < floorTop) {
@@ -134,7 +143,6 @@ fun HomeScreen(
 
             entities.forEach { entity ->
                 key(entity) {
-                    // If this is the main character entity (e.g., index 0)
                     if (entity == entities[0]) {
                         Box(
                             modifier = Modifier
@@ -142,30 +150,75 @@ fun HomeScreen(
                                 .size(entity.width, entity.height)
                                 .clickable { gameEngine.onClick() }
                         ) {
-                            // Base body layer
                             Image(
                                 painter = painterResource(R.drawable.body1),
-                                contentDescription = "Character Body",
+                                contentDescription = "base body",
                                 modifier = Modifier.fillMaxSize(),
                                 contentScale = ContentScale.Fit
                             )
-                            // Base head layer
                             Image(
                                 painter = painterResource(R.drawable.head1),
-                                contentDescription = "Character Head",
+                                contentDescription = "base head",
                                 modifier = Modifier.fillMaxSize(),
                                 contentScale = ContentScale.Fit
                             )
-                            // Everything else
-                            gameEngine.characterSprites.values.forEach { drawableRes ->
-                                if (drawableRes != null) {
-                                    Image(
-                                        painter = painterResource(drawableRes),
-                                        contentDescription = "Character Layer",
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentScale = ContentScale.Fit
-                                    )
+                            gameEngine.characterSprites["buty"]?.let { shoes ->
+                                Image(
+                                    painter = painterResource(shoes),
+                                    contentDescription = "buty",
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Fit
+                                )
+                            }
+                            gameEngine.characterSprites["spodnie"]?.let { pants ->
+                                Image(
+                                    painter = painterResource(pants),
+                                    contentDescription = "pant",
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Fit
+                                )
+                            }
+                            gameEngine.characterSprites["oczy"]?.let { eyes ->
+                                var currentEyesIcon by remember(eyes) { mutableStateOf(eyes) }
+                                LaunchedEffect(eyes) {
+                                    while (true) {
+                                        val delayTime = Random.nextLong(2000L, 5000L)
+                                        delay(delayTime.milliseconds)
+                                        currentEyesIcon = listOf(R.drawable.eyes_blink, R.drawable.eyes_closed).random()
+                                        delay(150.milliseconds)
+                                        currentEyesIcon = eyes
+                                    }
                                 }
+                                Image(
+                                    painter = painterResource(currentEyesIcon),
+                                    contentDescription = "źrenice",
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Fit
+                                )
+                            }
+                            gameEngine.characterSprites["ubrania"]?.let { outerwear ->
+                                Image(
+                                    painter = painterResource(outerwear),
+                                    contentDescription = "ubranie",
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Fit
+                                )
+                            }
+                            gameEngine.characterSprites["fryzury"]?.let { hair ->
+                                Image(
+                                    painter = painterResource(hair),
+                                    contentDescription = "włosy",
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Fit
+                                )
+                            }
+                            gameEngine.characterSprites["okulary"]?.let { glasses ->
+                                Image(
+                                    painter = painterResource(glasses),
+                                    contentDescription = "okulary",
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Fit
+                                )
                             }
                         }
                     } else {

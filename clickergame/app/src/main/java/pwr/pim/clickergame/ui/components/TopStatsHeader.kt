@@ -26,17 +26,7 @@ fun TopStatsHeader(
             .fillMaxWidth()
             .padding(16.dp),
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "Clicker Game",
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
+        //Spacer(modifier = Modifier.height(8.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -53,7 +43,7 @@ fun TopStatsHeader(
                         .padding(12.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Score", style = MaterialTheme.typography.bodyMedium)
+                    Text(text = "Punkty", style = MaterialTheme.typography.bodyMedium)
                     Text(text = score.toString(), style = MaterialTheme.typography.titleMedium)
                 }
             }
@@ -69,7 +59,7 @@ fun TopStatsHeader(
                         .padding(12.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Coins", style = MaterialTheme.typography.bodyMedium)
+                    Text(text = "Grosiki", style = MaterialTheme.typography.bodyMedium)
                     Text(text = coins.toString(), style = MaterialTheme.typography.titleMedium)
                 }
             }

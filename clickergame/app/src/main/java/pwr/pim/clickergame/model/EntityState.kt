@@ -19,7 +19,6 @@ class EntityState(
     val durationMs: Long = 500L,
     val width: Dp = 100.dp,
     val height: Dp = 100.dp,
-    val layers: List<Int> = emptyList(),
 ) {
     var x by mutableStateOf(initialX)
     var y by mutableStateOf(initialY)

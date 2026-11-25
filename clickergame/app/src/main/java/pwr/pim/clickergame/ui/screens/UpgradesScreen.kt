@@ -28,9 +28,9 @@ fun UpgradesScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize().padding(16.dp)) {
-        Text("Upgrades", style = MaterialTheme.typography.headlineMedium)
+        Text("Ulepszenia", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(8.dp))
-        Text("Score: ${gameEngine.score.toInt()}",
+        Text("Punkty: ${gameEngine.score.toInt()}",
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(bottom = 4.dp),
         )
@@ -68,7 +68,7 @@ fun UpgradesScreen(
                                 modifier = Modifier.padding(vertical = 4.dp),
                             )
                             Text(
-                                text = if (isMaxed) "MAXED OUT (Locked)" else "Cost: $cost Score",
+                                text = if (isMaxed) "WYKUPIONE" else "Koszt: $cost Punktów",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = if (isMaxed) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
                             )
@@ -78,7 +78,7 @@ fun UpgradesScreen(
                             onClick = { gameEngine.buyUpgrade(upgrade.id) },
                             enabled = canAfford,
                         ) {
-                            Text(text = if (isMaxed) "MAX" else "Buy")
+                            Text(text = if (isMaxed) "MAX" else "Kup teraz!")
                         }
                     }
                 }

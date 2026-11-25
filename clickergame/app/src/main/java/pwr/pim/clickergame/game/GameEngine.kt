@@ -12,6 +12,7 @@ import pwr.pim.clickergame.R
 
 enum class CharacterEvolutionStage(val drawableRes: Int) {
     // deprecated: replaced whole sprite sheet with individual sprites
+    // update: still waiting for diff sprites :)
     NORMAL(R.drawable.charactermerged_normal),
     CORRUPT1(R.drawable.charactermerged_normal),
     CORRUPT2(R.drawable.charactermerged_normal),
@@ -20,62 +21,48 @@ enum class CharacterEvolutionStage(val drawableRes: Int) {
     CORRUPT5(R.drawable.charactermerged_normal),
 }
 
-data class DressUp(
-    val id: String,
-    val name: String,
-    val slot: String, // "hairstyle", "outerwear", "pants", "shoes", "glasses", "eyes"
-    val drawableRes: Int,
-    val cost: Int
-)
+data class DressUp(val id: String, val name: String, val slot: String, val drawableRes: Int, val cost: Int)
 
 class GameEngine {
     var score by mutableDoubleStateOf(0.0)
         private set
-
     var coins by mutableIntStateOf(0)
         private set
-
     var characterEvolutionLevel by mutableIntStateOf(0)
         private set
-
-    // Upgrade levels map: upgradeId -> level
+    // map: upgradeId -> level
     val upgradeLevels = mutableStateMapOf<String, Int>()
 
-    // Clothes and Clothing Store
+    // UBRANIA
     val clothesItems = listOf(
-        DressUp("hair1", "Default Hair", "hairstyle", R.drawable.hair1, 0),
-        DressUp("hair2", "Default Hair", "hairstyle", R.drawable.hair2, 0),
-        DressUp("hoodie1", "Cozy Hoodie", "outerwear", R.drawable.hoodie1, 0),
-        DressUp("hoodie2", "Cozy Hoodie", "outerwear", R.drawable.hoodie2, 0),
-        DressUp("pants1", "Comfy Pants", "pants", R.drawable.pants1, 0),
-        DressUp("pants2", "Comfy Pants", "pants", R.drawable.pants2, 0),
-        DressUp("shoes1", "Sneakers", "shoes", R.drawable.shoes1, 0),
-        DressUp("shoes2", "Sneakers", "shoes", R.drawable.shoes2, 0),
-        DressUp("glasses0", "No glasses", "glasses", R.drawable.nothing, 0),
-        DressUp("glasses1", "Cool Glasses", "glasses", R.drawable.glasses1, 0),
-        DressUp("skirt1", "skirt", "pants", R.drawable.skirt1, 0),
-        DressUp("eyes1", "Brown Eyes", "eyes", R.drawable.eyes1, 0),
+        DressUp("hair1", "Zwykła fryzura", "fryzury", R.drawable.hair1, 0),
+        DressUp("hair2", "Różowe rozpuszczone", "fryzury", R.drawable.hair2, 0),
+        DressUp("hoodie1", "Fioletowa bluza", "ubrania", R.drawable.hoodie1, 0),
+        DressUp("hoodie2", "Zielona bluza", "ubrania", R.drawable.hoodie2, 0),
+        DressUp("pants1", "Zwykłe spodnie", "spodnie", R.drawable.pants1, 0),
+        DressUp("pants2", "Jeansy", "spodnie", R.drawable.pants2, 0),
+        DressUp("shoes1", "Skarpetki", "buty", R.drawable.shoes1, 0),
+        DressUp("shoes2", "Papucie", "buty", R.drawable.shoes2, 0),
+        DressUp("glasses0", "Bez okularów", "okulary", R.drawable.nothing, 0),
+        DressUp("glasses1", "Okularki", "okulary", R.drawable.glasses1, 0),
+        DressUp("skirt1", "Spódniczka", "spodnie", R.drawable.skirt1, 0),
+        DressUp("eyes1", "Twoje oczy", "oczy", R.drawable.eyes1, 0),
     )
-    // dressup order
     val unlockedClothesIds = mutableStateListOf("hair1", "hoodie1", "pants1", "shoes1", "glasses1", "eyes1")
     val characterSprites = mutableStateMapOf<String, Int?>().apply {
-        put("hairstyle", R.drawable.hair1)
-        put("outerwear", R.drawable.hoodie1)
-        put("pants", R.drawable.pants1)
-        put("shoes", R.drawable.shoes1)
-        put("glasses", R.drawable.glasses1)
-        put("eyes", R.drawable.eyes1)
-    }
-    fun dressSprite(slot: String, drawableRes: Int?) {characterSprites[slot] = drawableRes}
+        put("ubrania", R.drawable.hoodie1)
+        put("spodnie", R.drawable.pants1)
+        put("buty", R.drawable.shoes1)
+        put("fryzury", R.drawable.hair1)
+        put("okulary", R.drawable.glasses1)
+        put("oczy", R.drawable.eyes1)}
 
     fun buyAndEquipClothes(item: DressUp): Boolean {
         if (unlockedClothesIds.contains(item.id)) {
-            // unlocked = equip
             characterSprites[item.slot] = item.drawableRes
             return true
         }
-
-        // Buy with coins
+        // buy with coins
         if (coins >= item.cost) {
             coins -= item.cost
             unlockedClothesIds.add(item.id)
@@ -87,8 +74,8 @@ class GameEngine {
     val availableUpgrades = listOf(
         UpgradeDefinition(
             id = "flat_click",
-            name = "Sharper Claws",
-            description = "Increases flat score per click",
+            name = "Poranna herbatka",
+            description = "Lepsze kliknięcia",
             type = UpgradeType.FLAT_CLICK,
             baseCost = 10.0,
             costScaling = 1.25,
@@ -96,8 +83,8 @@ class GameEngine {
         ),
         UpgradeDefinition(
             id = "click_mult",
-            name = "Energy Drink",
-            description = "Multiplies total click power",
+            name = "Kalkulator prosty",
+            description = "Mnoży moc kliknięcia",
             type = UpgradeType.CLICK_MULTIPLIER,
             baseCost = 50.0,
             costScaling = 1.5,
@@ -105,8 +92,8 @@ class GameEngine {
         ),
         UpgradeDefinition(
             id = "passive_income",
-            name = "Auto Petting Machine",
-            description = "Generates score automatically every second",
+            name = "Kitku",
+            description = "Pasywne punkty na sekundę",
             type = UpgradeType.PASSIVE_INCOME,
             baseCost = 100.0,
             costScaling = 1.4,
@@ -114,8 +101,8 @@ class GameEngine {
         ),
         UpgradeDefinition(
             id = "crit_chance",
-            name = "Lucky Paws",
-            description = "Increases critical click chance",
+            name = "Kalkulator naukowy",
+            description = "Kliknięcia mają szansę na dużą nagrodę",
             type = UpgradeType.CRIT_CHANCE,
             baseCost = 75.0,
             costScaling = 1.6,
@@ -123,8 +110,8 @@ class GameEngine {
         ),
         UpgradeDefinition(
             id = "crit_power",
-            name = "Fierce Swipe",
-            description = "Increases critical hit damage multiplier",
+            name = "Przypinka na plecak",
+            description = "Większa nagroda za przypadkowe kliknięcia",
             type = UpgradeType.CRIT_POWER,
             baseCost = 150.0,
             costScaling = 1.5,
@@ -133,7 +120,7 @@ class GameEngine {
         UpgradeDefinition(
             id = "corruption",
             name = "Sesja",
-            description = "ONE MORE GAME",
+            description = "ja nie chce do kostnicy",
             type = UpgradeType.CHARACTER_EVOLUTION,
             baseCost = 2500.0,
             costScaling = 3.0,
@@ -141,7 +128,7 @@ class GameEngine {
         ),
     )
 
-    // Derived stats
+    // statystyki ulepszeń; ulepszenia
     val clickPower by derivedStateOf {
         val base = 1.0
         val flatUpgrade = availableUpgrades.find { it.id == "flat_click" }
@@ -182,9 +169,7 @@ class GameEngine {
     fun onClick(): Boolean {
         var gain = clickPower * clickMultiplier
         val isCrit = Random.nextDouble() < critChance
-        if (isCrit) {
-            gain *= critPower
-        }
+        if (isCrit) {gain *= critPower}
 
         val oldScoreInt = score.toInt()
         score += gain
@@ -230,5 +215,13 @@ class GameEngine {
             return true
         }
         return false
+    }
+
+    fun addMinigamesRewards(whackedCount: Int) {
+        val oldScoreInt = score.toInt()
+        score += whackedCount.toDouble()
+        val newScoreInt = score.toInt()
+        if ((newScoreInt / 10) > (oldScoreInt / 10)) {coins += (newScoreInt / 10) - (oldScoreInt / 10)}
+        coins += whackedCount * 3
     }
 }

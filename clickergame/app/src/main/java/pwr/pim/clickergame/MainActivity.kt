@@ -112,10 +112,10 @@ enum class AppDestinations(
     val label: String,
     val icon: Int,
 ) {
-    HOME("Home", R.drawable.ic_home),
-    UPGRADE("Upgrades", R.drawable.ic_shop),
-    MINIGAMES("Minigames", R.drawable.ic_game),
-    GALLERY(label = "Wardrobe", icon = R.drawable.ic_camera),
+    HOME("Sypialnia", R.drawable.ic_home),
+    UPGRADE("Ulepszenia", R.drawable.ic_shop),
+    MINIGAMES("Minigry", R.drawable.ic_game),
+    GALLERY(label = "Garderoba", icon = R.drawable.ic_camera),
 }
 
 @Preview(showBackground = true)

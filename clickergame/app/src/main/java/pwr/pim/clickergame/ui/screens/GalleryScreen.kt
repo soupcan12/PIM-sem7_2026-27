@@ -29,12 +29,12 @@ import pwr.pim.clickergame.game.GameEngine
 @Composable
 fun GalleryScreen(gameEngine: GameEngine) {
     var selectedSlot by remember { mutableStateOf("hairstyle") }
-    val slots = listOf("hairstyle", "outerwear", "pants", "shoes", "glasses", "eyes")
+    val slots = listOf("fryzury", "ubrania", "spodnie", "buty", "okulary", "oczy")
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text("Wardrobe", style = MaterialTheme.typography.headlineMedium)
+        Text("Garderoba", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(8.dp))
-        Text("Coins: ${gameEngine.coins}", style = MaterialTheme.typography.titleMedium)
+        Text("Grosiki: ${gameEngine.coins}", style = MaterialTheme.typography.titleMedium)
 
         // Slot Selector Tabs (Scrollable Horizontal Overflow)
         LazyRow(
@@ -55,7 +55,7 @@ fun GalleryScreen(gameEngine: GameEngine) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Items for selected slot
+        // itemki
         val itemsForSlot = gameEngine.clothesItems.filter { it.slot == selectedSlot }
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             items(itemsForSlot) { item ->
@@ -70,7 +70,7 @@ fun GalleryScreen(gameEngine: GameEngine) {
                     ) {
                         Column {
                             Text(item.name, style = MaterialTheme.typography.titleMedium)
-                            Text(if (isUnlocked) "Unlocked" else "Cost: ${item.cost} Coins")
+                            Text(if (isUnlocked) "Kupione" else "Koszt: ${item.cost} Grosików")
                         }
                         Button(
                             onClick = { gameEngine.buyAndEquipClothes(item) },
@@ -78,9 +78,9 @@ fun GalleryScreen(gameEngine: GameEngine) {
                         ) {
                             Text(
                                 when {
-                                    isEquipped -> "Equipped"
-                                    isUnlocked -> "Equip"
-                                    else -> "Buy & Equip"
+                                    isEquipped -> "Założone"
+                                    isUnlocked -> "Załóż"
+                                    else -> "Kup i załóż"
                                 }
                             )
                         }
